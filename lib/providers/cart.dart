@@ -69,6 +69,7 @@ class Cart with ChangeNotifier {
   }
 
   void removeSingleItem(String productid) {
+    // validation
     if (!_items.containsKey(productid)) {
       return;
     }

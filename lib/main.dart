@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (ctx) => Orders())
       ],
       child: MaterialApp(
-          title: 'ShopApp',
+          title: 'MyShop v3',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             primarySwatch: Colors.purple,
