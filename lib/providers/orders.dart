@@ -19,18 +19,18 @@ class OrderItem {
 
 class Orders with ChangeNotifier {
   List<OrderItem> _orders = [];
+  final String authToken;
+  final String userId;
+  Orders(this.authToken, this.userId, this._orders);
 
   List<OrderItem> get orders {
     return [..._orders];
   }
 
-  // {-MMGoWUPhvB0nO2z967N: {amount: 199.99, datetime: 2020-11-16T09:10:07.987485,
-  // products: [{id: 2020-11-16 09:10:01.791792, price: 199.99,
-  // productid: -MFVIl3AEq0nYH_iRibu, quantity: 1, title: Rocket Moon Base}]}}
-
   Future<void> fetchAndSetOrders() async {
-    const url = 'https://learnflutterndart-course.firebaseio.com/orders/.json';
+    final url = 'https://learnflutterndart-course.firebaseio.com/orders/$userId.json?auth=$authToken';
     final response = await http.get(url);
+    //print(json.decode(response.body));
 
     final List<OrderItem> loadedOrders = [];
     final extractedData = json.decode(response.body) as Map<String, dynamic>;
@@ -38,6 +38,7 @@ class Orders with ChangeNotifier {
     if (extractedData == null) {
       return;
     }
+
     extractedData.forEach((orderId, orderData) {
       loadedOrders.add(OrderItem(
           orderid: orderId,
@@ -53,13 +54,12 @@ class Orders with ChangeNotifier {
               .toList()));
     });
 
-    // Order the list with most recent on top
     _orders = loadedOrders.reversed.toList();
     notifyListeners();
   }
 
   Future<void> addOrder(List<CartItem> cartProducts, double total) async {
-    const url = 'https://learnflutterndart-course.firebaseio.com/orders/.json';
+    final url = 'https://learnflutterndart-course.firebaseio.com/orders/$userId.json?auth=$authToken';
     final timestamp = DateTime.now();
     final response = await http.post(url,
         body: json.encode(

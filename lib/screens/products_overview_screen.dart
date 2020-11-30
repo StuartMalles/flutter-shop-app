@@ -26,7 +26,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
         _isLoading = true;
       });
 
-      Provider.of<ProductsProvider>(context, listen: false).fetchAndSetProducts().then((_) {
+      Provider.of<ProductsProvider>(context, listen: false).fetchAndSetProducts(filterByUser: false).then((_) {
         setState(() {
           _isLoading = false;
         });
@@ -40,7 +40,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('MyShop v3'),
+        title: Text('MyShop'),
         actions: <Widget>[
           PopupMenuButton(
               onSelected: (FilterOptions selectedValue) {
