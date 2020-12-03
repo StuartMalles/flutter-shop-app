@@ -27,6 +27,10 @@ class Orders with ChangeNotifier {
     return [..._orders];
   }
 
+  // {-MMGoWUPhvB0nO2z967N: {amount: 199.99, datetime: 2020-11-16T09:10:07.987485,
+  // products: [{id: 2020-11-16 09:10:01.791792, price: 199.99,
+  // productid: -MFVIl3AEq0nYH_iRibu, quantity: 1, title: Rocket Moon Base}]}}
+
   Future<void> fetchAndSetOrders() async {
     final url = 'https://learnflutterndart-course.firebaseio.com/orders/$userId.json?auth=$authToken';
     final response = await http.get(url);

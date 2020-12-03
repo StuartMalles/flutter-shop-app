@@ -5,6 +5,9 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/http_exception.dart';
 
+// Test Account
+// email: test@test.com / Password
+
 class Auth with ChangeNotifier {
   String _token;
   DateTime _expiryDate;
@@ -95,7 +98,6 @@ class Auth with ChangeNotifier {
     _expiryDate = expiryDate;
     notifyListeners();
 
-    // restart the timer
     _autoLogout();
 
     return true;
@@ -114,7 +116,7 @@ class Auth with ChangeNotifier {
     notifyListeners();
 
     final prefs = await SharedPreferences.getInstance();
-    prefs.remove('userData'); // clears specific key
+    prefs.remove('userData');
   }
 
   void _autoLogout() {

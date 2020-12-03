@@ -6,9 +6,9 @@ import './product.dart';
 
 class ProductsProvider with ChangeNotifier {
   List<Product> _items = ProductData().sampleProductList;
+
   final String authToken;
   final String userId;
-
   ProductsProvider(this.authToken, this.userId, this._items);
 
   List<Product> get items {
@@ -34,6 +34,7 @@ class ProductsProvider with ChangeNotifier {
       // {-MFR9jhWqQ4PSemT71p0: {
       //     description:This is a test,
       //     imageUrl   :https://live.staticflickr.com/65535/48954138922_9c42173f08_c.jpg,
+      //     isFavorite :false,
       //     price      :12.99,
       //     title      :Test }
       // }
